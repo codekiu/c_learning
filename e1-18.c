@@ -1,27 +1,25 @@
 #include <stdatomic.h>
 #include <stdio.h>
-#include <string.h>
 
 #define MAXLINE 1000
 
 int get_line(char s[], int lim);
-void reverse_line(char s[], char reversed_line[]);
+int remove_trailing(char s[]);
 
 int main() {
   int len = 0;
   // int max = 0;
   char line[MAXLINE];
-  char reversed_line[MAXLINE];
   // char longest[MAXLINE];
 
+  int max = 2;
+
   while ((len = get_line(line, MAXLINE)) != EOF) {
-    // clear out reversed_line...
-    memset(reversed_line, '\0', sizeof(reversed_line));
-    // then draw it
-    reverse_line(line, reversed_line);
-    printf("%s", line);
-    printf("%s\n", reversed_line);
-    printf("\n");
+    len = remove_trailing(line);
+
+    if (len > 0) {
+      printf("%s", line);
+    }
   }
 
   return 0;
@@ -47,18 +45,26 @@ int get_line(char s[], int lim) {
   return i;
 }
 
-void reverse_line(char s[], char reversed_line[]) {
-  int i, c, d;
-  d = 0;
+int remove_trailing(char s[]) {
+  int i;
 
-  for (i = 0; s[i] != '\0'; ++i)
-    ;
+  for (i = 0; s[i] != '\0'; ++i);
 
-  c = i - 2;
+  i--;
 
-  while (c >= 0) {
-    reversed_line[d] = s[c];
-    --c;
-    ++d;
+  if (s[i] == '\n')
+    --i;
+
+  while (i >= 0 && (i[s] == ' ' || s[i] == '\t'))
+    i--;
+
+  if (i < 0) {
+    s[0] = '\0';
+    return 0;
   }
+
+  s[++i] = '\n';
+  s[++i] = '\0';
+
+  return i;
 }
