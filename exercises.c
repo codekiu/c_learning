@@ -58,7 +58,9 @@ struct longest_word calculate_longest_word(char string[]) {
   int idx = 0;
   int status = 0;
 
-  struct longest_word result = {0};
+  struct longest_word result = {
+    .lenght = 0,
+  };
 
   while (string[idx] != '\0') {
     status = string[idx] != ' ' ? IN_WORD : OUT_WORD;

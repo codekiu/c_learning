@@ -25,7 +25,7 @@ int main() {
     }
 
     for (y = lwords[i]; y > 0; y--) {
-      putchar('-');
+     putchar('-');
     }
 
     if (lwords[i] > 0) {
